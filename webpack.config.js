@@ -1,4 +1,3 @@
-
 const Encore = require("@symfony/webpack-encore");
 
 //Configurez manuellement l'environnement d'exécution s'il n'est pas déjà configuré par la commande "encore".
@@ -23,6 +22,9 @@ Encore
    */
   .addEntry("app", "./assets/app.ts") //Fichier JS/TS
   .addStyleEntry("styles", "./assets/styles/app.scss")
+
+  // Activer Stimulus (important si vous utilisez le Stimulus bundle de Symfony)
+  .enableStimulusBridge("./assets/controllers.json")
 
   //Activer TypeScript et Sass
   .enableTypeScriptLoader()
@@ -73,4 +75,3 @@ Encore
 //.autoProvidejQuery()
 
 module.exports = Encore.getWebpackConfig();
-
