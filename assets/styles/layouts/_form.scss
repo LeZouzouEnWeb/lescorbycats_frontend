@@ -1,0 +1,145 @@
+#id01 {
+    label {
+        cursor: pointer;
+    }
+    .login-remember {
+        position: relative;
+
+        #lostpwd {
+            display: none;
+            + label {
+                position: absolute;
+                right: 0px;
+                text-decoration: underline;
+                &:hover {
+                    color: #b10000;
+                }
+            }
+        }
+    }
+}
+
+.w3-modal {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    text-shadow: initial;
+    color: initial;
+    font-size: 18px;
+    z-index: 999 !important;
+    @include tablet-max {
+        padding: 0 !important;
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        height: 85px;
+        img {
+            display: flex;
+            flex-wrap: nowrap;
+            padding: 0px;
+            width: 50px;
+            margin: 0 15px;
+        }
+        span:last-child {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-right: 85px;
+            color: aliceblue;
+            text-shadow: 4px 3px 3px black;
+            background-color: hsl(311deg 43.4% 23.06%);
+            border-radius: 15px;
+        }
+        img,
+        span:last-child {
+            box-shadow:
+                0 4px 10px 0px rgb(255 255 255 / 20%),
+                0px 4px 20px 0px rgb(249 248 248 / 46%),
+                2px 4px 3px 1px rgb(0 0 0 / 79%);
+        }
+    }
+
+    &--content {
+        position: relative;
+        padding: 0;
+        outline: 0;
+        margin: 0 auto;
+        background-color: hsl(301deg 59.24% 82.61%) !important;
+        // background-color: hsl(311deg 33.71% 73.87%);
+        @include tablet-max {
+            margin: 3px !important;
+            width: calc(100vw - 6px);
+            height: calc(100vh - 6px);
+        }
+        .title {
+            display: flex;
+            justify-content: center;
+        }
+        .modal-patienter {
+            font-size: 20px;
+            height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            img {
+                width: 20px;
+                height: auto;
+                display: inline;
+            }
+        }
+        form {
+            fieldset {
+                // background-color: color-primary($s: 60%, $l: 82%);
+                background-color: hsl(0deg 0% 92.91%);
+                margin: 15px 0px 4px;
+                .w3-input {
+                    width: 100% !important;
+                }
+                label {
+                    display: inline-block;
+                }
+                input,
+                textarea {
+                    margin-bottom: 5px;
+                    &.invalid {
+                        color: rgb(255, 0, 0);
+                    }
+                }
+                .w3-modal_-compteur {
+                    border-radius: 20px !important;
+                    &.invalid {
+                        background-color: #b10000 !important;
+                    }
+                }
+            }
+
+            .erreur {
+                display: none;
+            }
+        }
+        & > div:last-child,
+        & > div:first-child {
+            background-color: hsl(301deg 46.57% 35.99%) !important;
+        }
+    }
+
+    &--footer {
+        @include tablet-max {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+            bottom: 0px;
+        }
+    }
+}
+
+.elementor-element--promotion {
+    display: none;
+}

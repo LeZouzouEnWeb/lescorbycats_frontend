@@ -1,0 +1,19 @@
+/* CSS */
+#menu-personnalise {
+    display: none;
+    list-style: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: absolute;
+    &.active {
+        display: block;
+    }
+    li {
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #ddd;
+    }
+}

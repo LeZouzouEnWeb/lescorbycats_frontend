@@ -1,0 +1,15 @@
+.w3 {
+    &-tooltip {
+        span {
+            position: absolute;
+            left: 10px;
+            width: max-content;
+            bottom: -35px;
+        }
+    }
+    &-input {
+        &.w3-animate-input {
+            width: 60%;
+        }
+    }
+}
