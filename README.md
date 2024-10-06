@@ -1,1 +1,0 @@
-# lescorbycats_frontend
