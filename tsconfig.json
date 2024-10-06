@@ -1,4 +1,3 @@
-
 {
     "compilerOptions": {
         "target": "es5", // Version ECMAScript cible
@@ -16,4 +15,3 @@
         "node_modules" // Exclure le dossier node_modules
     ]
 }
-
