@@ -22,3 +22,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Twig\Extension\ImageExtension:
+        tags: ["twig.extension"]
+
+    App\Twig\Runtime\ImageExtensionRuntime:
+        tags: ['twig.runtime']
