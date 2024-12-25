@@ -1,15 +1,15 @@
 <?php
 
 /**
- *Renvoie la carte d'importation pour cette application.
+ * Returns the importmap for this application.
  *
- *-"chemin" est un chemin à l'intérieur du système de mappage d'actifs. Utilisez le
- *Commande "debug:asset-map" pour voir la liste complète des chemins.
+ * - "path" is a path inside the asset mapper system. Use the
+ *     "debug:asset-map" command to see the full list of paths.
  *
- *-"point d'entrée" (JavaScript uniquement) défini sur true pour tout module qui
- *être utilisé comme "point d'entrée" (et passé à la fonction importmap() Twig).
+ * - "entrypoint" (JavaScript only) set to true for any module that will
+ *     be used as an "entrypoint" (and passed to the importmap() Twig function).
  *
- *La commande "importmap:require" peut être utilisée pour ajouter de nouvelles entrées à ce fichier.
+ * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
     'app' => [
@@ -20,8 +20,7 @@ return [
         'version' => '3.2.2',
     ],
     '@symfony/stimulus-bundle' => [
-        // 'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
-        'path' => '@symfony/stimulus-bundle/loader.js',
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
     '@hotwired/turbo' => [
         'version' => '7.3.0',
