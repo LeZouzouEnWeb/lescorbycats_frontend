@@ -1,7 +1,12 @@
 name: Assign Ticket Number
+
 on:
   pull_request:
     types: [opened]
+
+permissions:
+  pull-requests: read
+  contents: read
 
 jobs:
   assign-ticket:
@@ -11,59 +16,47 @@ jobs:
         id: assign
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.REPO_ACCESS_TOCKEN }}
           script: |
-            // Convertir le numéro de pull request en entier
-            const prNumber = parseInt('${{ github.event.pull_request.number }}');
+            // Extraire le numéro de pull request comme entier
+            const prNumber = parseInt('${{ github.event.pull_request.number }}', 10);
 
-            // Effectuer la requête GraphQL avec le numéro de pull request correct
+            if (isNaN(prNumber)) {
+              throw new Error('Invalid pull request number');
+            }
+
+            // Requête GraphQL avec le numéro correct
             const response = await github.graphql(`
-              query {
-                repository(owner: "${{ github.repository_owner }}", name: "tranquillo") {
-                  pullRequest(number: ${prNumber}) {
+              query($owner: String!, $repo: String!, $number: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $number) {
                     title
                     body
                   }
                 }
               }
-            `);
+            `, {
+              owner: "${{ github.repository_owner }}",
+              repo: "${{ github.event.repository.name }}",
+              number: prNumber
+            });
 
-            // Extraire le pull request de la réponse
+            // Extraire les informations du PR
             const pr = response.repository.pullRequest;
 
-            // Appeler la fonction extractTicketNumber avec le titre du pull request
+            // Appeler la fonction pour extraire le numéro de ticket
             const ticketNumber = extractTicketNumber(pr.title);
 
-            // Vérifier si un numéro de ticket a été trouvé
             if (ticketNumber) {
               console.log(`Ticket number found: ${ticketNumber}`);
-              // Code pour attribuer le numéro de ticket au PR
+              // Ajoutez ici le code pour associer le numéro de ticket au PR si nécessaire
             } else {
               console.log('No ticket number found in PR title');
             }
 
             // Fonction pour extraire le numéro de ticket du titre
             function extractTicketNumber(title) {
-              // Définir le motif à rechercher
-              const pattern = /ticket\s+(\d+)/i; // Le 'i' signifie que la recherche est insensible à la casse
-
-              // Rechercher le motif dans le titre
+              const pattern = /\[Ticket_\d+\]/i;
               const match = title.match(pattern);
-
-              // Si un match est trouvé, retourner le numéro de ticket
-              if (match && match[1]) {
-                return match[1];
-              } else {
-                const pattern = /ticket_+(\d+)/i; // Le 'i' signifie que la recherche est insensible à la casse
-                // Rechercher le motif dans le titre
-                const match = title.match(pattern);
-
-                // Si un match est trouvé, retourner le numéro de ticket
-                if (match && match[1]) {
-                  return match[1];
-                } else {
-                  // Si aucun match n'est trouvé, retourner null
-                  return null;
-                }
-              }
+              return match ? match[1] : null;
             }
